@@ -1,9 +1,33 @@
+# Virtual environment & dependencies
 .venv/
-.pytest_cache/
-.ruff_cache/
-__pycache__/
-*.py[cod]
+env/
+venv/
 *.egg-info/
 dist/
+build/
+
+# Testing & Linting caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+__pycache__/
+*.py[cod]
+
+# Secrets & Local Configuration
 .env
+.env.local
+
+# Local SQLite databases & vector caches
 *.db
+*.sqlite3
+chroma/
+
+# Gradio cache & temporary upload artifacts
+.gradio/
+flagged/
+
+# OS and Editor specific
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

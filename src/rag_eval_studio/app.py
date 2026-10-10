@@ -227,6 +227,163 @@ def _preset_visibility(preset: str, mode: str) -> tuple[dict, dict]:
     )
 
 
+CUSTOM_CSS = """
+/* RAG Eval Studio — Clean, Restrained Developer Interface */
+:root {
+  --res-bg: #fcfcfd;
+  --res-surface: #ffffff;
+  --res-border: #e2e8f0;
+  --res-border-focus: #3b82f6;
+  --res-text-main: #0f172a;
+  --res-text-muted: #64748b;
+  --res-accent: #2563eb;
+  --res-accent-hover: #1d4ed8;
+}
+
+body, .gradio-container {
+  background-color: var(--res-bg) !important;
+  color: var(--res-text-main) !important;
+}
+
+/* Sidebar styling */
+.sidebar, [data-testid="sidebar"] {
+  background-color: #f8fafc !important;
+  border-right: 1px solid var(--res-border) !important;
+}
+
+.sidebar h2 {
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  letter-spacing: -0.02em !important;
+  padding-bottom: 8px !important;
+  border-bottom: 1px solid var(--res-border) !important;
+  margin-bottom: 12px !important;
+}
+
+.sidebar button {
+  text-align: left !important;
+  justify-content: flex-start !important;
+  border-radius: 6px !important;
+  font-size: 0.885rem !important;
+  font-weight: 500 !important;
+  color: #334155 !important;
+  padding: 8px 12px !important;
+  margin-bottom: 4px !important;
+  transition: all 0.15s ease !important;
+}
+
+.sidebar button:hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+.sidebar button.primary {
+  background-color: #eff6ff !important;
+  color: #1d4ed8 !important;
+  border: 1px solid #bfdbfe !important;
+  font-weight: 600 !important;
+}
+
+/* Form groups & clean containers */
+.gr-group {
+  border: 1px solid var(--res-border) !important;
+  background-color: var(--res-surface) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+  padding: 16px !important;
+  margin-bottom: 14px !important;
+}
+
+/* Headings */
+h1 {
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  color: #0f172a !important;
+}
+
+h2 {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.015em !important;
+  color: #1e293b !important;
+  margin-top: 1rem !important;
+  margin-bottom: 0.35rem !important;
+}
+
+/* Input fields */
+input[type="text"], input[type="password"], textarea, select {
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  font-size: 0.9rem !important;
+  color: #0f172a !important;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+  border-color: var(--res-border-focus) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12) !important;
+  outline: none !important;
+}
+
+/* Action button */
+button.primary:not(.sidebar button), .gr-button.primary:not(.sidebar button) {
+  background-color: var(--res-accent) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--res-accent) !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.18) !important;
+  transition: background-color 0.15s ease !important;
+}
+
+button.primary:not(.sidebar button):hover,
+.gr-button.primary:not(.sidebar button):hover {
+  background-color: var(--res-accent-hover) !important;
+}
+
+/* Tables and Dataframes */
+.gr-dataframe {
+  border: 1px solid var(--res-border) !important;
+  border-radius: 6px !important;
+}
+
+.gr-dataframe th {
+  background-color: #f8fafc !important;
+  color: #475569 !important;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+  border-bottom: 1px solid var(--res-border) !important;
+  padding: 10px 14px !important;
+}
+
+.gr-dataframe td {
+  padding: 10px 14px !important;
+  font-size: 0.885rem !important;
+  color: #1e293b !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+/* Tab bar */
+button.tab-nav {
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  color: #64748b !important;
+  border-bottom: 2px solid transparent !important;
+}
+
+button.tab-nav.selected {
+  color: var(--res-accent) !important;
+  border-bottom: 2px solid var(--res-accent) !important;
+  font-weight: 600 !important;
+}
+"""
+
+
 def build_app() -> gr.Blocks:
     with gr.Blocks(title="RAG Eval Studio") as app:
         with gr.Sidebar(open=False, width=250):
@@ -562,6 +719,7 @@ def main() -> None:
         share=False,
         inbrowser=False,
         footer_links=[],
+        css=CUSTOM_CSS,
         theme=gr.themes.Soft(
             primary_hue="blue",
             neutral_hue="slate",
