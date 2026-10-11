@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: rag-eval-studio
+    runtime: python
+    buildCommand: pip install uv && uv sync --no-group dev
+    startCommand: uv run rag-eval-studio
+    plan: free                   # Change to "starter" for persistent disk + no spin-down
+    envVars:
+      - key: RAG_EVAL_HOST
+        value: 0.0.0.0           # Required — Render routes external traffic to 0.0.0.0
+      - key: RAG_EVAL_PORT
+        value: 10000             # Required — Render expects port 10000 by default
+      - key: PYTHON_VERSION
+        value: "3.12"
+      # Uncomment and set secrets in the Render dashboard (never commit keys here)
+      # - key: OPENAI_API_KEY
+      #   sync: false
+      # - key: ANTHROPIC_API_KEY
+      #   sync: false
+      # - key: COHERE_API_KEY
+      #   sync: false
+      # - key: OLLAMA_BASE_URL
+      #   sync: false

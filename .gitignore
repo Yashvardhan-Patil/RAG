@@ -1,0 +1,55 @@
+# ─── Virtual environments & packaging ───────────────────────────────────────
+.venv/
+env/
+venv/
+*.egg-info/
+dist/
+build/
+__pypackages__/
+
+# ─── Testing & Linting caches ────────────────────────────────────────────────
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+__pycache__/
+*.py[cod]
+.coverage
+coverage.xml
+htmlcov/
+
+# ─── Secrets & Local Configuration ───────────────────────────────────────────
+# NEVER commit real credentials — use .env.example as the template
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets.json
+secrets.yaml
+
+# ─── Local vector store & databases ──────────────────────────────────────────
+*.db
+*.sqlite3
+chroma/
+chroma_db/
+chromadb/
+
+# ─── Gradio cache & upload artifacts ─────────────────────────────────────────
+.gradio/
+flagged/
+
+# ─── OS & editor artefacts ───────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# ─── Jupyter ─────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ─── Logs & reports ──────────────────────────────────────────────────────────
+*.log
+reports/
+
+# ─── uv lock (keep if you pin deps; remove if you want floating) ──────────────
+# uv.lock   ← intentionally tracked (reproducible builds)
