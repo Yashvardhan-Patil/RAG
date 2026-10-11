@@ -703,11 +703,16 @@ def build_app() -> gr.Blocks:
         dataset_help.click(
             lambda: _view("Documentation"), outputs=views, api_visibility="private"
         )
+
+    @app.app.get("/healthz")
+    def healthz() -> dict[str, str]:
+        return {"status": "ok"}
+
     return app
 
 
 def main() -> None:
-    port_env = os.environ.get("PORT") or os.environ.get("RAG_EVAL_PORT") or "10000"
+    port_env = os.environ.get("PORT") or os.environ.get("RAG_EVAL_PORT") or "7860"
     port = int(port_env)
     host = os.environ.get("RAG_EVAL_HOST", "0.0.0.0")
     os.environ["GRADIO_SERVER_NAME"] = host
@@ -723,7 +728,9 @@ def main() -> None:
         if "0.0.0.0" not in entries:
             entries.append("0.0.0.0")
         os.environ[name] = ",".join(entries)
-    build_app().queue().launch(
+    app = build_app()
+    app.queue().launch(
+        _app=app.app,
         server_name=host,
         server_port=port,
         share=False,
