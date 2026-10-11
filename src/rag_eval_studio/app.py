@@ -707,14 +707,12 @@ def build_app() -> gr.Blocks:
 
 
 def main() -> None:
-    port_env = os.environ.get("PORT") or os.environ.get("RAG_EVAL_PORT") or "7860"
+    port_env = os.environ.get("PORT") or os.environ.get("RAG_EVAL_PORT") or "10000"
     port = int(port_env)
-    default_host = (
-        "0.0.0.0"
-        if ("PORT" in os.environ or "RENDER" in os.environ)
-        else "127.0.0.1"
-    )
-    host = os.environ.get("RAG_EVAL_HOST", default_host)
+    host = os.environ.get("RAG_EVAL_HOST", "0.0.0.0")
+    os.environ["GRADIO_SERVER_NAME"] = host
+    os.environ["GRADIO_SERVER_PORT"] = str(port)
+    print(f"Starting RAG Eval Studio on {host}:{port}...")
     # Gradio checks its own localhost route; bypass ambient HTTP proxies for it.
     for name in ("NO_PROXY", "no_proxy"):
         entries = [
