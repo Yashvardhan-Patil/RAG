@@ -10,6 +10,8 @@ services:
         value: 0.0.0.0           # Required — Render routes external traffic to 0.0.0.0
       - key: RAG_EVAL_PORT
         value: 10000             # Required — Render expects port 10000 by default
+      - key: PORT
+        value: 10000
       - key: PYTHON_VERSION
         value: "3.12"
       # ── Set secrets in the Render dashboard under Environment → Secret Files
