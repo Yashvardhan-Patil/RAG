@@ -707,6 +707,8 @@ def build_app() -> gr.Blocks:
 
 
 def main() -> None:
+    host = os.environ.get("RAG_EVAL_HOST", "127.0.0.1")
+    port = int(os.environ.get("RAG_EVAL_PORT", "7860"))
     # Gradio checks its own localhost route; bypass ambient HTTP proxies for it.
     for name in ("NO_PROXY", "no_proxy"):
         entries = [
@@ -715,7 +717,8 @@ def main() -> None:
         if "127.0.0.1" not in entries:
             os.environ[name] = ",".join([*entries, "127.0.0.1"])
     build_app().queue().launch(
-        server_name="127.0.0.1",
+        server_name=host,
+        server_port=port,
         share=False,
         inbrowser=False,
         footer_links=[],
