@@ -12,12 +12,21 @@ services:
         value: 10000             # Required — Render expects port 10000 by default
       - key: PYTHON_VERSION
         value: "3.12"
-      # Uncomment and set secrets in the Render dashboard (never commit keys here)
+      # ── Set secrets in the Render dashboard under Environment → Secret Files
+      # ── or as individual environment variables. Never commit real keys here.
+      #
+      # GROQ (recommended — fast free tier, great for judge)
+      # - key: GROQ_API_KEY
+      #   sync: false
+      #
+      # OpenAI (optional)
       # - key: OPENAI_API_KEY
       #   sync: false
+      #
+      # Anthropic (optional)
       # - key: ANTHROPIC_API_KEY
       #   sync: false
+      #
+      # Cohere (optional)
       # - key: COHERE_API_KEY
-      #   sync: false
-      # - key: OLLAMA_BASE_URL
       #   sync: false
